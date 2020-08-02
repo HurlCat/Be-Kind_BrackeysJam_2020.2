@@ -27,20 +27,15 @@ public class PlayerInventory : MonoBehaviour
         }
         
         _inventory.Add(GenerateTape()); // Add random tape
-        
-        GameObject tapeObject = (GameObject) Instantiate(_UIPrefab, _UIElement); // instantiate the UI Element
-        
-        tapeObject.name = _inventory[_inventory.Count - 1].genre.ToString() + "_Tape"; // rename the UI Element
-        tapeObject.GetComponent<VHSUI>().tape = _inventory[_inventory.Count-1]; // set the Element's graphics
-        
-        _UITapes.Add(tapeObject); 
+
+        InstantiateNewestTape();
         
         Debug.Log("Added new tape " + _inventory[_inventory.Count-1].genre);
     }
 
     // Generates a random Tape
-    //VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), UnityEngine.Random.Range(0,100) > GameController.singleton.rewindProbability ? true : false);
-    VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), true);
+    VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), UnityEngine.Random.Range(0,100) > GameController.singleton.rewindProbability ? true : false);
+    //VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), true);
     
     internal void StockShelf(Collider2D shelf)
     {
@@ -52,13 +47,59 @@ public class PlayerInventory : MonoBehaviour
                 Debug.Log("Tape Returned");
                 
                 shelfInfo.IncrementStock(); // stock shelf
-                _inventory.Remove(_inventory[i]); // remove from inventory
                 
-                Destroy(_UITapes[i]); // destroy UI element
-                _UITapes.Remove(_UITapes[i]); // remove reference in list
+                RemoveTapeFromInventory(i);
+                
                 return; // exit
             }
-            
         Debug.Log("No Tapes Found");
+    }
+
+    internal void RewindTape(Collider2D rewinder)
+    {
+        TapeRewinder tapeRewinder = rewinder.GetComponent<TapeRewinder>();
+
+        if (tapeRewinder.IsRewinding() && tapeRewinder.IsFull()) // if the thing is rewinding a tape
+            return;
+        
+        if (!tapeRewinder.IsRewinding() && tapeRewinder.IsFull()) // if the thing is done rewinding a tape
+        {
+            Debug.Log("Tape Taken from Rewinder");
+            _inventory.Add(tapeRewinder.GiveTapeToPlayer());
+            InstantiateNewestTape();
+            return;
+        }
+        else // not rewinding and not full
+        {
+            for(int i = 0; i < _inventory.Count; i++) // iterate through inventory
+                if (!_inventory[i].rewound) // if we find an unwound tape
+                {
+                    Debug.Log("Tape Inserted into Rewinder");
+                    tapeRewinder.InsertTape(_inventory[i]); // insert the tape into the rewinder
+                    
+                    RemoveTapeFromInventory(i);
+                    return;
+                }
+        }
+        
+        Debug.Log("No rewindable tapes");
+    }
+
+    private void RemoveTapeFromInventory(int index)
+    {
+        _inventory.Remove(_inventory[index]); // remove from inventory
+                
+        Destroy(_UITapes[index]); // destroy UI element
+        _UITapes.Remove(_UITapes[index]); // remove reference in list
+    }
+
+    private void InstantiateNewestTape()
+    {
+        GameObject tapeObject = (GameObject) Instantiate(_UIPrefab, _UIElement); // instantiate the UI Element
+        
+        tapeObject.name = _inventory[_inventory.Count - 1].genre.ToString() + "_Tape"; // rename the UI Element
+        tapeObject.GetComponent<VHSUI>().tape = _inventory[_inventory.Count-1]; // set the Element's graphics
+        
+        _UITapes.Add(tapeObject); 
     }
 }

@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
                 // if customer is checking out
                     // AddScore();
                 break;
+            case "VHSRewinder":
+                _inventory.RewindTape(hit);
+                break;
         }
     }
 }
