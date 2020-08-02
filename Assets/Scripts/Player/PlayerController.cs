@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
                 // AddScore();
                 break;
             case "VHSBin":
-                _inventory.GiveTape();
+                _inventory.GiveRandomTape();
                 break;
             case "Customer" :
                 // if customer is returning
