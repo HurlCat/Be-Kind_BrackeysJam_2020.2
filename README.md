@@ -18,4 +18,4 @@
 ## Credits
 Steven Hurley - Programming, Game Design
 
-[Sara Cathriner](saracathriner.com) - Art, Game Design
+[Sara Cathriner](https://saracathriner.com/) - Art, Game Design
