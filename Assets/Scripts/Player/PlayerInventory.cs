@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -15,7 +14,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     private GameObject _UIPrefab;
 
-    internal void GiveTape()
+    internal void GiveRandomTape()
     {
         if (_inventory.Count >= 2)
         {
@@ -27,15 +26,21 @@ public class PlayerInventory : MonoBehaviour
             Debug.Log("Tape Removed");
         }
         
-        _inventory.Add(new VHSTape((Genre)UnityEngine.Random.Range(0,5), true));
-        GameObject tape = (GameObject) Instantiate(_UIPrefab, _UIElement);
-        tape.name = _inventory[_inventory.Count - 1].genre.ToString() + "_Tape";
-        tape.GetComponent<VHSUI>().tape = _inventory[_inventory.Count-1];
+        _inventory.Add(GenerateTape()); // Add random tape
         
-        _UITapes.Add(tape);
+        GameObject tapeObject = (GameObject) Instantiate(_UIPrefab, _UIElement); // instantiate the UI Element
+        
+        tapeObject.name = _inventory[_inventory.Count - 1].genre.ToString() + "_Tape"; // rename the UI Element
+        tapeObject.GetComponent<VHSUI>().tape = _inventory[_inventory.Count-1]; // set the Element's graphics
+        
+        _UITapes.Add(tapeObject); 
         
         Debug.Log("Added new tape " + _inventory[_inventory.Count-1].genre);
     }
+
+    // Generates a random Tape
+    //VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), UnityEngine.Random.Range(0,100) > GameController.singleton.rewindProbability ? true : false);
+    VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), true);
     
     internal void StockShelf(Collider2D shelf)
     {
@@ -48,8 +53,9 @@ public class PlayerInventory : MonoBehaviour
                 
                 shelfInfo.IncrementStock(); // stock shelf
                 _inventory.Remove(_inventory[i]); // remove from inventory
-                Destroy(_UITapes[i]);
-                _UITapes.Remove(_UITapes[i]); // remove UI element
+                
+                Destroy(_UITapes[i]); // destroy UI element
+                _UITapes.Remove(_UITapes[i]); // remove reference in list
                 return; // exit
             }
             
