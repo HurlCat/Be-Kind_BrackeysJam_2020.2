@@ -246,7 +246,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &272885663
 GameObject:
@@ -503,61 +503,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45, y: 2.4}
   m_EdgeRadius: 0
---- !u!1 &469654755
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 469654757}
-  - component: {fileID: 469654756}
-  m_Layer: 0
-  m_Name: VHSLibrary
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &469654756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469654755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cea715f53bb55c4a833733a31830a7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Action_MovieCovers:
-  - {fileID: 21300000, guid: e00fb3a87e343944b98ef965daba32a1, type: 3}
-  Horror_MovieCovers:
-  - {fileID: 21300000, guid: df075de6990ec2341a4b9b3c12c4aba2, type: 3}
-  Mystery_MovieCovers:
-  - {fileID: 21300000, guid: fb1a3fc5715d78e4fb88a8c6a71e84d7, type: 3}
-  Comedy_MovieCovers:
-  - {fileID: 21300000, guid: 7debad961b7cc2c4ba84309f95eaa24d, type: 3}
-  Docu_MovieCovers:
-  - {fileID: 21300000, guid: 19050146c32ddf746921792e4472e950, type: 3}
-  Romance_MovieCovers:
-  - {fileID: 21300000, guid: ae4f41bef76defa4990bcc918a2a139c, type: 3}
---- !u!4 &469654757
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469654755}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 253.192, y: 84.79156, z: -237.16183}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +686,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3660cb41aaa74d146992662af5c612ad, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1528,7 +1473,7 @@ RectTransform:
   m_Children:
   - {fileID: 2110781250}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1611,7 +1556,7 @@ Transform:
   - {fileID: 1504575419}
   - {fileID: 1191601486}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121575462
 GameObject:
@@ -2240,7 +2185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1504575418
 GameObject:
@@ -3150,6 +3095,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6286197904342006618, guid: c86e6e699b174b8408561838a250885c,
+        type: 3}
+      propertyPath: tapesInStock.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286197904342006618, guid: c86e6e699b174b8408561838a250885c,
+        type: 3}
+      propertyPath: tapesInStock.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286197904342006618, guid: c86e6e699b174b8408561838a250885c,
+        type: 3}
+      propertyPath: tapesInStock.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286197904342006618, guid: c86e6e699b174b8408561838a250885c,
+        type: 3}
+      propertyPath: tapesInStock.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286197904342006618, guid: c86e6e699b174b8408561838a250885c,
+        type: 3}
+      propertyPath: tapesInStock.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286197904342006618, guid: c86e6e699b174b8408561838a250885c,
+        type: 3}
+      propertyPath: tapesInStock.Array.data[5]
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c86e6e699b174b8408561838a250885c, type: 3}
 --- !u!1001 &3646857490400183433
@@ -3222,7 +3197,7 @@ PrefabInstance:
     - target: {fileID: 3646857490626188203, guid: 89908238c74470940bc33484c1758b5b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3646857490626188203, guid: 89908238c74470940bc33484c1758b5b,
         type: 3}

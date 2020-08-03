@@ -15,12 +15,35 @@ public class VHSLibrary : MonoBehaviour
     public Sprite[] Docu_MovieCovers;
     public Sprite[] Romance_MovieCovers;
 
+    public int[] tapesInStock = new int[6];
+
     void Awake()
     {
         if(singleton != null)
             Destroy(this);
         else
             singleton = this;
+    }
+
+    public List<int> GenresInStock() // returns a list of indexes of genres in stock
+    {
+        List<int> inStock = new List<int>();
+
+        for(int i = 0; i < tapesInStock.Length; i++)
+            if(tapesInStock[i] > 0)
+                inStock.Add(i);
+        
+        return inStock;
+    }
+    
+    public VHSTape GetTapeFromGenre(int genreToGet)
+    {
+        bool rewindProbability = UnityEngine.Random.Range(0, 100) > GameController.singleton.rewindProbability
+            ? true
+            : false;
+
+        tapesInStock[(int)genreToGet]--;
+        return new VHSTape((Genre)genreToGet, rewindProbability);
     }
 
     public Sprite GetRandomArtwork(Genre genre)

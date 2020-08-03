@@ -25,18 +25,20 @@ public class PlayerInventory : MonoBehaviour
             
             Debug.Log("Tape Removed");
         }
+
+        List<int> genresInStock = VHSLibrary.singleton.GenresInStock();
+        if (genresInStock.Count == 0)
+            return;                                                     //TODO: TELL USER OUT OF STOCK
+
+        int rand = UnityEngine.Random.Range(0, genresInStock.Count);
         
-        _inventory.Add(GenerateTape()); // Add random tape
+        _inventory.Add(VHSLibrary.singleton.GetTapeFromGenre(genresInStock[rand])); // grabs a tape from the bin
 
         InstantiateNewestTape();
         
         Debug.Log("Added new tape " + _inventory[_inventory.Count-1].genre);
     }
 
-    // Generates a random Tape
-    VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), UnityEngine.Random.Range(0,100) > GameController.singleton.rewindProbability ? true : false);
-    //VHSTape GenerateTape() => new VHSTape((Genre)UnityEngine.Random.Range(0,5), true);
-    
     internal void StockShelf(Collider2D shelf)
     {
         Shelf shelfInfo = shelf.GetComponent<Shelf>();

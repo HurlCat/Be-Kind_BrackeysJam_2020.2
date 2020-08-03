@@ -32,16 +32,8 @@ public class PlayerController : MonoBehaviour
         
         if(Input.GetButtonDown("Fire1"))
             Interact();
-
-        if (Input.GetButtonDown("Fire2"))
-            RewindTape();
     }
-
-    private void RewindTape()
-    {
-        throw new NotImplementedException();
-    }
-
+    
     void Interact()
     {
         var hit = Physics2D.OverlapCircle(interactCheck.position, interactRadius, whatIsInteractable);
