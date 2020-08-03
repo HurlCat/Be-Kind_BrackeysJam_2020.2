@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     internal float horizInput;
     internal float vertInput;
 
+    internal float oldVert;
+    internal float oldHoriz;
+
     [Header("PlayerStats")]
     [SerializeField] private float walkSpeed = 3f;
 
@@ -21,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        oldHoriz = horizInput;
+        oldVert = vertInput;
+        
         horizInput = Input.GetAxisRaw("Horizontal");
         vertInput = Input.GetAxisRaw("Vertical");
 

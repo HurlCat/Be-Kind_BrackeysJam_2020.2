@@ -29,6 +29,14 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetFloat("VertMove", _playerMovement.vertInput);
         _animator.SetFloat("HorizMove", _playerMovement.horizInput);
+        _animator.SetFloat("Speed", new Vector2(_playerMovement.vertInput, _playerMovement.horizInput).magnitude);
+
+        if (!(_playerMovement.vertInput == 0f && _playerMovement.horizInput == 0f))
+        {
+            _animator.SetFloat("OldVert", _playerMovement.oldVert);
+            _animator.SetFloat("OldHoriz", _playerMovement.oldHoriz);
+        }
+            
         
         if(Input.GetButtonDown("Fire1"))
             Interact();

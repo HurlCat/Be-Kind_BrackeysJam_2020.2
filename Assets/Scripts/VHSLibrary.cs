@@ -15,7 +15,8 @@ public class VHSLibrary : MonoBehaviour
     public Sprite[] Docu_MovieCovers;
     public Sprite[] Romance_MovieCovers;
 
-    public int[] tapesInStock = new int[6];
+    [SerializeField]
+    private int[] tapesInStock = new int[6];
 
     void Awake()
     {
@@ -23,6 +24,9 @@ public class VHSLibrary : MonoBehaviour
             Destroy(this);
         else
             singleton = this;
+
+        for (int i = 0; i < tapesInStock.Length; i++)
+            tapesInStock[i] = GameController.singleton.stockPerGenre;
     }
 
     public List<int> GenresInStock() // returns a list of indexes of genres in stock
