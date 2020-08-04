@@ -30,7 +30,7 @@ public class CustomerAI : MonoBehaviour
 
     private void Start()
     {
-        pickGenreToBuy();
+        randomizeStats();
         FindWaypoint();
     }
 
@@ -127,7 +127,13 @@ public class CustomerAI : MonoBehaviour
 
     public AIState GetState() => _currentState;
 
-    private void pickGenreToBuy() => _tapeToBuy = (Genre)UnityEngine.Random.Range(0, 6);
+    private void randomizeStats()
+    {
+        _tapeToBuy = (Genre)UnityEngine.Random.Range(0, 6);
+        _patienceTime = UnityEngine.Random.Range(3f,5f);
+        _browsingTime = UnityEngine.Random.Range(3f,8f);
+
+    } 
 
     private void CheckShelfStock()
     {
