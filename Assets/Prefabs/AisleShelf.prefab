@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 472744914009611361}
   - component: {fileID: 472744914009611362}
+  - component: {fileID: 4681445028730172106}
   m_Layer: 0
   m_Name: Shelves (1)
   m_TagString: Untagged
@@ -81,6 +82,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4681445028730172106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472744914009611360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683981dfb2422084a89d6cb11bc2f99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &472744914130718193
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 472744914130718194}
   - component: {fileID: 472744914130718195}
+  - component: {fileID: 8884649021839293522}
   m_Layer: 0
   m_Name: Shelves
   m_TagString: Untagged
@@ -162,6 +176,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8884649021839293522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472744914130718193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683981dfb2422084a89d6cb11bc2f99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &472744914659531470
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  shelf: {fileID: 0}
   markers:
   - {fileID: 4649740046365834134}
   - {fileID: 348397146003684655}
