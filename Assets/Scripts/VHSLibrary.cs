@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -24,7 +25,10 @@ public class VHSLibrary : MonoBehaviour
             Destroy(this);
         else
             singleton = this;
+    }
 
+    private void Start()
+    {
         for (int i = 0; i < tapesInStock.Length; i++)
             tapesInStock[i] = GameController.singleton.stockPerGenre;
     }
