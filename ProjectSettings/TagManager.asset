@@ -8,6 +8,7 @@ TagManager:
   - Customer
   - VHSBin
   - VHSRewinder
+  - Register
   layers:
   - Default
   - TransparentFX
@@ -48,8 +49,14 @@ TagManager:
   - name: Environment
     uniqueID: 2374713117
     locked: 0
+  - name: BackGroundProps
+    uniqueID: 1087894933
+    locked: 0
   - name: Entities
     uniqueID: 3715208227
+    locked: 0
+  - name: ForeGroundProps
+    uniqueID: 93363693
     locked: 0
   - name: UI
     uniqueID: 2652569899
