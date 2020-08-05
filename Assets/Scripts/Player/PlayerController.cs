@@ -58,12 +58,8 @@ public class PlayerController : MonoBehaviour
             case "VHSBin":
                 _inventory.GiveRandomTape();
                 break;
-            case "Customer" :
-                // if customer is returning
-                    // GiveTape();
-                    // AddScore();
-                // if customer is checking out
-                    // AddScore();
+            case "Register" :
+                hit.GetComponent<Register>().TakePayment();
                 break;
             case "VHSRewinder":
                 _inventory.RewindTape(hit);

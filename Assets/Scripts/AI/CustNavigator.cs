@@ -14,7 +14,7 @@ public class CustNavigator : MonoBehaviour
     [SerializeField] private float _walkSpeed = 4f;
 
     [Tooltip("Distance customer needs to be before going to next waypoint")] 
-    [SerializeField] private float _nextWaypointDistance = 3f;
+    [SerializeField] internal float _nextWaypointDistance = .1f;
 
     [Tooltip("Rate at which path updates")]
     [SerializeField] private float _pathUpdateRate = .5f;

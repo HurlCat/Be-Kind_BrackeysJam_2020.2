@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class WaypointManager : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class WaypointManager : MonoBehaviour
         }
     }
 
-    public Transform GetRegisterWaypoint() => register.markers[0];
+    public Transform GetRegisterWaypoint() => register.markers[UnityEngine.Random.Range(0, register.markers.Length)];
 
     public Transform GetExitWaypoint() => exit.markers[0];
 }
