@@ -9,9 +9,6 @@ public class PlayerInventory : MonoBehaviour
     public List<Transform> _UISlots = new List<Transform>(2);
     
     [SerializeField]
-    private Transform _UIElement;
-
-    [SerializeField]
     private GameObject _UIPrefab;
 
     internal void GiveRandomTape()
@@ -19,9 +16,7 @@ public class PlayerInventory : MonoBehaviour
         if (_inventory.Count >= 2)
         {
             //drop a tape
-            _inventory.RemoveAt(1);
-            Destroy(_UITapes[1]);
-            _UITapes.RemoveAt(1);
+            RemoveTapeFromInventory(1);
             
             Debug.Log("Tape Removed");
         }
@@ -34,7 +29,7 @@ public class PlayerInventory : MonoBehaviour
         
         _inventory.Add(VHSLibrary.singleton.GetTapeFromGenre(genresInStock[rand])); // grabs a tape from the bin
 
-        InstantiateNewestTape();
+        InstantiateNewestTape(_inventory.Count-1);
         
         Debug.Log("Added new tape " + _inventory[_inventory.Count-1].genre);
     }
@@ -68,7 +63,7 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("Tape Taken from Rewinder");
             _inventory.Add(tapeRewinder.GiveTapeToPlayer());
-            InstantiateNewestTape();
+            InstantiateNewestTape(_inventory.Count-1);
             return;
         }
         else // not rewinding and not full
@@ -93,15 +88,21 @@ public class PlayerInventory : MonoBehaviour
                 
         Destroy(_UITapes[index]); // destroy UI element
         _UITapes.Remove(_UITapes[index]); // remove reference in list
+
+        foreach (var tape in _UITapes)
+        {
+            tape.transform.parent = _UISlots[Mathf.Clamp(_UISlots.IndexOf(tape.transform.parent) - 1, 0, 1)];
+            tape.transform.position = tape.transform.parent.position;
+        }
     }
 
-    private void InstantiateNewestTape()
+    private void InstantiateNewestTape(int index)
     {
-        GameObject tapeObject = (GameObject) Instantiate(_UIPrefab, _UIElement); // instantiate the UI Element
+        GameObject tapeUIPrefab = (GameObject) Instantiate(_UIPrefab, _UISlots[index]); // instantiate the UI Element
         
-        tapeObject.name = _inventory[_inventory.Count - 1].genre.ToString() + "_Tape"; // rename the UI Element
-        tapeObject.GetComponent<VHSUI>().tape = _inventory[_inventory.Count-1]; // set the Element's graphics
+        tapeUIPrefab.name = _inventory[_inventory.Count - 1].genre.ToString() + "_Tape"; // rename the UI Element
+        tapeUIPrefab.GetComponent<VHSUI>().tape = _inventory[_inventory.Count-1]; // set the Element's graphics
         
-        _UITapes.Add(tapeObject); 
+        _UITapes.Add(tapeUIPrefab); 
     }
 }

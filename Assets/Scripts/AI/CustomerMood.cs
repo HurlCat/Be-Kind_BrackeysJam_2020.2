@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class CustomerMood : MonoBehaviour
@@ -43,5 +43,10 @@ public class CustomerMood : MonoBehaviour
             return (GameObject)Instantiate(_happyBubble, _bubblePos.position, _bubblePos.rotation, _bubblePos);
 
         return (GameObject)Instantiate(_mehBubble, _bubblePos.position, _bubblePos.rotation, _bubblePos);
+    }
+
+    private void OnDestroy()
+    {
+        ScoreKeeper.Singleton.ModScore(_mood);
     }
 }
