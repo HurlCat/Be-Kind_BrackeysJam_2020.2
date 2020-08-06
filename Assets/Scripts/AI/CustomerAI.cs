@@ -66,9 +66,8 @@ public class CustomerAI : MonoBehaviour
                     {
                         _nav._destination = this.transform;
 
-                        if (_leaving)
+                        if (_leaving && this.transform.position.y < -2.5f)
                         {
-                            // TODO: ScoreManager
                             Destroy(this.gameObject);
                         }
                         
