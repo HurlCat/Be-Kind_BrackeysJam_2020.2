@@ -7,6 +7,7 @@ public class CustomerAI : MonoBehaviour
 {
     private CustNavigator _nav;
     private CustomerMood _mood;
+    private Animator _animator;
     [SerializeField] private Shelf _shelf;
     [SerializeField] private Register _register;
 
@@ -36,6 +37,7 @@ public class CustomerAI : MonoBehaviour
         _nav = GetComponent<CustNavigator>();
         _register = FindObjectOfType<Register>();
         _mood = GetComponent<CustomerMood>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -58,6 +60,8 @@ public class CustomerAI : MonoBehaviour
             switch (_currentState) // we're gonna try and see if we can change our state
             {
                 case AIState.Walking:
+                    _animator.SetBool("Walking", true);
+                    
                     if (_nav._reachedEndOfPath) // if we get to our destination
                     {
                         _nav._destination = this.transform;
@@ -75,6 +79,7 @@ public class CustomerAI : MonoBehaviour
                     }
                     break;
                 case AIState.BrowsingTapes:
+                    _animator.SetBool("Walking", false);
                     if (_timer > _browsingTime) // if we get tired of browsing
                     {
                         _timer = 0f;
@@ -103,6 +108,7 @@ public class CustomerAI : MonoBehaviour
                     }
                     break;
                 case AIState.WaitingInLine:
+                    _animator.SetBool("Walking", false);
                     if (_timer > _patienceTime) // customer lost patience
                     {
                         _timer = 0f;

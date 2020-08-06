@@ -8,6 +8,7 @@ public class CustNavigator : MonoBehaviour
 {
     internal Seeker _seeker;
     private Rigidbody2D _rb;
+    private Animator _animator;
     
     [SerializeField] internal Transform _destination;
 
@@ -28,6 +29,7 @@ public class CustNavigator : MonoBehaviour
     {
         _seeker = GetComponent<Seeker>();
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponentInChildren<Animator>();
 
         _walkSpeed = UnityEngine.Random.Range(1.5f, 3f);
     }
@@ -65,9 +67,20 @@ public class CustNavigator : MonoBehaviour
             _reachedEndOfPath = false;
         }
 
+        
+        
         Vector3 direction = ((Vector3) _path.vectorPath[_currentWaypoint] - this.transform.position).normalized;
         _rb.MovePosition(this.transform.position + direction * (Time.deltaTime * _walkSpeed));
 
+        _animator.SetFloat("Horiz", direction.x);
+        _animator.SetFloat("Vert", direction.y);
+        
+        if (_destination != this.transform)
+        {
+            _animator.SetFloat("OldHoriz", direction.x);
+            _animator.SetFloat("OldVert", direction.y);
+        }
+        
         float distance = Vector2.Distance(this.transform.position, _path.vectorPath[_currentWaypoint]);
 
         if (distance < _nextWaypointDistance)
