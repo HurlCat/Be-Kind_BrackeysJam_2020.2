@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -579759069
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 7240826011385085095, guid: 7dcc26c55567a5748aec9f74f116f75b,
     type: 3}
@@ -229,9 +229,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd5227931d540f4fa16192caee70aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _UISlots: []
-  _UIElement: {fileID: 0}
-  _UIPrefab: {fileID: 0}
+  _UISlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  _UIPrefab: {fileID: 264323520125855664, guid: 82e74ff5cff9fe44b94bef92194dfe94,
+    type: 3}
 --- !u!1 &7233416617714144260
 GameObject:
   m_ObjectHideFlags: 0
