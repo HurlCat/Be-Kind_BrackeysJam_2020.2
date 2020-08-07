@@ -19,3 +19,5 @@
 Steven Hurley - Programming, Game Design
 
 [Sara Cathriner](https://saracathriner.com/) - Art, Game Design
+
+Adam Cathriner - Audio Engineering
