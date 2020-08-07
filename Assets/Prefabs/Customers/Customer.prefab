@@ -251,6 +251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shelf: {fileID: 0}
   _register: {fileID: 0}
+  _GroundPrefab: {fileID: 3571983644249260770, guid: 39da231917e41e24a9ef057832a0e255,
+    type: 3}
   _tapeToBuy: 0
   _hasTape: 0
   _paid: 0

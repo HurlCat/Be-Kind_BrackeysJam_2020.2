@@ -28,20 +28,13 @@ public class Shelf : MonoBehaviour
             _shelfAnimator.UpdateSprite(GetCapacityInPercent());
     }
 
-    private void Update()
-    {
-        if (GetCapacityInPercent() < .33f)
-        {
-            TutorialEvents.singleton.FirstLowStock();
-        }
-    }
-
     public void IncrementStock() 
     {
         _tapesInStock++;
         if(_shelfAnimator != null)
             _shelfAnimator.UpdateSprite(GetCapacityInPercent());
     }
+    
     public bool CompareGenres(Genre genre) => (genre == _genre) ? true : false; // returns true if param == this.genre
     public bool IsFull() => _tapesInStock >= _capacity; // returns true if at capacity
     public float GetCapacityInPercent() => ((float)_tapesInStock / (float)_capacity);
@@ -52,12 +45,28 @@ public class Shelf : MonoBehaviour
             _shelfAnimator.UpdateSprite(GetCapacityInPercent());
         if (_tapesInStock - quantity >= 0)
         {
+            if (GetCapacityInPercent() < .33f)
+                TutorialEvents.singleton.FirstLowStock();
+            
             _tapesInStock -= quantity;
             return true;
         }
         else
         {
             return false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Tape"))
+        {
+            GroundTape _tapeComponent = other.gameObject.GetComponent<GroundTape>();
+            if (CompareGenres(_tapeComponent.tape.genre) && _tapeComponent.tape.rewound)
+            {
+                IncrementStock();
+                Destroy(other.gameObject);
+            }
         }
     }
 }

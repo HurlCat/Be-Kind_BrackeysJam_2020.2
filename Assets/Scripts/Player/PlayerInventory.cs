@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,13 +15,7 @@ public class PlayerInventory : MonoBehaviour
     internal void GiveRandomTape()
     {
         if (_inventory.Count >= 2)
-        {
-            //drop a tape
             DropTape(_inventory.Count-1);
-            RemoveTapeFromInventory(_inventory.Count-1);
-            
-            Debug.Log("Tape Removed");
-        }
 
         List<int> genresInStock = VHSLibrary.singleton.GenresInStock();
         if (genresInStock.Count == 0)
@@ -35,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("Added new tape " + _inventory[_inventory.Count-1].genre);
     }
 
-    internal void StockShelf(Collider2D shelf)
+    internal bool StockShelf(Collider2D shelf)
     {
         Shelf shelfInfo = shelf.GetComponent<Shelf>();
 
@@ -48,9 +43,9 @@ public class PlayerInventory : MonoBehaviour
                 
                 RemoveTapeFromInventory(i);
                 
-                return; // exit
+                return true; // exit
             }
-        Debug.Log("No Tapes Found");
+        return false;
     }
 
     internal void RewindTape(Collider2D rewinder)
@@ -63,11 +58,7 @@ public class PlayerInventory : MonoBehaviour
         if (!tapeRewinder.IsRewinding() && tapeRewinder.IsFull()) // if the thing is done rewinding a tape
         {
             if (_inventory.Count == 2)
-            {
                 DropTape(_inventory.Count-1);
-                RemoveTapeFromInventory(_inventory.Count-1);
-            }
-                
             
             _inventory.Add(tapeRewinder.GiveTapeToPlayer());
             InstantiateNewestTape(_inventory.Count-1);
@@ -112,8 +103,38 @@ public class PlayerInventory : MonoBehaviour
         _UITapes.Add(tapeUIPrefab); 
     }
 
-    private void DropTape(int index)
+    internal GameObject DropTape(int index)
     {
         GameObject _groundTape = (GameObject)Instantiate(_GroundPrefab, this.transform.position, Quaternion.identity);
+        _groundTape.GetComponent<GroundTape>().SetTape(_inventory[index]);
+        
+        RemoveTapeFromInventory(index);
+
+        return _groundTape;
+    }
+    
+    internal GameObject DropTape(int index, Transform spawnPoint)
+    {
+        GameObject _groundTape = (GameObject)Instantiate(_GroundPrefab, spawnPoint.position, Quaternion.identity);
+        _groundTape.GetComponent<GroundTape>().SetTape(_inventory[index]);
+        
+        RemoveTapeFromInventory(index);
+
+        return _groundTape;
+    }
+
+    public int GetInventorySize() => _inventory.Count;
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Tape"))
+        {
+            if (_inventory.Count < 2)
+            {
+                _inventory.Add(other.gameObject.GetComponent<GroundTape>().GiveTapeToPlayer());
+                InstantiateNewestTape(_inventory.Count-1);
+                Destroy(other.gameObject);
+            }
+        }
     }
 }

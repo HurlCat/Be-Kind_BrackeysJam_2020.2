@@ -9,9 +9,14 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Animator _animator;
-
     internal PlayerMovement _playerMovement;
     internal PlayerInventory _inventory;
+    
+    [Header("Sounds")]
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _stockShelf;
+
+    [SerializeField] private float _throwForce = 5f;
     
     [Header("InteractField")]
     [SerializeField] private Transform interactCheck;
@@ -23,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _inventory = GetComponent<PlayerInventory>();
+        _audioSource = GetComponent<AudioSource>();
     } 
 
     private void Update()
@@ -40,6 +46,9 @@ public class PlayerController : MonoBehaviour
         
         if(Input.GetButtonDown("Fire1"))
             Interact();
+
+        if (Input.GetButtonDown("Fire2") && _inventory.GetInventorySize() > 0)
+            ThrowTape();
     }
     
     void Interact()
@@ -52,8 +61,8 @@ public class PlayerController : MonoBehaviour
         switch (hit.tag)
         {
             case "Shelf":
-                _inventory.StockShelf(hit);
-                // AddScore();
+                if( _inventory.StockShelf(hit) )
+                    Util.PlayAudio(_audioSource, _stockShelf);
                 break;
             case "VHSBin":
                 _inventory.GiveRandomTape();
@@ -65,5 +74,15 @@ public class PlayerController : MonoBehaviour
                 _inventory.RewindTape(hit);
                 break;
         }
+    }
+
+    void ThrowTape()
+    {
+        GameObject tape = _inventory.DropTape(_inventory.GetInventorySize() - 1, interactCheck);
+        Rigidbody2D rb = tape.GetComponent<Rigidbody2D>();
+
+        Vector2 direction = (interactCheck.position - this.transform.position).normalized;
+        
+        rb.AddForce(direction * _throwForce);
     }
 }

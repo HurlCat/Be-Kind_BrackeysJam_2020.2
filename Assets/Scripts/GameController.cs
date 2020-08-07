@@ -9,9 +9,7 @@ public class GameController : MonoBehaviour
     
     public int rewindProbability = 33; // probability that tapes need to be rewound
 
-    public int maxCustomersInStore = 5;
-
-    public int stockPerGenre = 1;
+    public int stockPerGenre = 20;
 
     private void Awake()
     {

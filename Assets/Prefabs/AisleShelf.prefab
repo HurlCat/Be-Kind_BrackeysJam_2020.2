@@ -25,12 +25,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472744914009611360}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 472744915197215201}
-  m_RootOrder: 1
+  m_Father: {fileID: 472744914130718194}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &472744914009611362
 SpriteRenderer:
@@ -108,6 +108,8 @@ GameObject:
   - component: {fileID: 472744914130718194}
   - component: {fileID: 472744914130718195}
   - component: {fileID: 8884649021839293522}
+  - component: {fileID: 2259373244708279817}
+  - component: {fileID: 6017814990962540632}
   m_Layer: 0
   m_Name: Shelves
   m_TagString: Untagged
@@ -125,7 +127,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 472744914009611361}
   m_Father: {fileID: 472744915197215201}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -194,6 +197,38 @@ MonoBehaviour:
   _CustomYOffset: 1
   yOffset: 0
   offset: 0
+--- !u!114 &2259373244708279817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472744914130718193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab0153cf301ebe4ebbd405ec15550b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shelf: {fileID: 472744914659531464}
+--- !u!95 &6017814990962540632
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472744914130718193}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cadee09c8f8fab647ab76a8ce38cde90, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &472744914659531470
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _capacity: 0
+  _tapesInStock: 0
+  _shelfAnimator: {fileID: 2259373244708279817}
   _genre: 0
 --- !u!114 &5755958336493606401
 MonoBehaviour:
@@ -314,7 +351,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472744914130718194}
-  - {fileID: 472744914009611361}
   m_Father: {fileID: 472744914659531471}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
