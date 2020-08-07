@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Pathfinding;
 
@@ -72,13 +73,15 @@ public class CustNavigator : MonoBehaviour
         Vector3 direction = ((Vector3) _path.vectorPath[_currentWaypoint] - this.transform.position).normalized;
         _rb.MovePosition(this.transform.position + direction * (Time.deltaTime * _walkSpeed));
 
-        _animator.SetFloat("Horiz", direction.x);
-        _animator.SetFloat("Vert", direction.y);
+        Vector3 lastWaypointDir = ((Vector3) _path.vectorPath.Last() - this.transform.position).normalized;
+        
+        _animator.SetFloat("Horiz", lastWaypointDir.x);
+        _animator.SetFloat("Vert", lastWaypointDir.y);
         
         if (_destination != this.transform)
         {
-            _animator.SetFloat("OldHoriz", direction.x);
-            _animator.SetFloat("OldVert", direction.y);
+            _animator.SetFloat("OldHoriz", lastWaypointDir.x);
+            _animator.SetFloat("OldVert", lastWaypointDir.y);
         }
         
         float distance = Vector2.Distance(this.transform.position, _path.vectorPath[_currentWaypoint]);

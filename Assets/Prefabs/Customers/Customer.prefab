@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 4986158868478078191}
   m_Layer: 0
   m_Name: Customer
-  m_TagString: Player
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1995674080128883945}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d26608538080bae47a901b7efeec1d27, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destination: {fileID: 0}
   _walkSpeed: 2
-  _nextWaypointDistance: 0.1
+  _nextWaypointDistance: 0.2
   _pathUpdateRate: 0.5
 --- !u!114 &1995674080128883959
 MonoBehaviour:
