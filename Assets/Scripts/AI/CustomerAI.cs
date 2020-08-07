@@ -10,6 +10,7 @@ public class CustomerAI : MonoBehaviour
     private Animator _animator;
     [SerializeField] private Shelf _shelf;
     [SerializeField] private Register _register;
+    [SerializeField] private GameObject _GroundPrefab;
 
     private GameObject _moodBubbleInstance;
     
@@ -118,6 +119,8 @@ public class CustomerAI : MonoBehaviour
                         
                         _nav._destination = WaypointManager.singleton.GetExitWaypoint();
                         _leaving = true;
+                        
+                        DropTape();
 
                         _register.LeaveLine(this);
                         ChangeState(AIState.Walking);
@@ -229,6 +232,12 @@ public class CustomerAI : MonoBehaviour
     }
 
     public void PayForTape() => _paid = true;
+    
+    private void DropTape()
+    {
+        GameObject _groundTape = (GameObject)Instantiate(_GroundPrefab, this.transform.position, Quaternion.identity);
+        _groundTape.GetComponent<GroundTape>().SetTape(new VHSTape(_tapeToBuy, true));
+    }
 }
 
 
