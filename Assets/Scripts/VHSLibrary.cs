@@ -8,6 +8,9 @@ using Random = System.Random;
 public class VHSLibrary : MonoBehaviour
 {
     public static VHSLibrary singleton;
+    [SerializeField] private ParticleSystem _particleSystem;
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _rustle;
     
     public Sprite[] Action_MovieCovers;
     public Sprite[] Horror_MovieCovers;
@@ -25,6 +28,8 @@ public class VHSLibrary : MonoBehaviour
             Destroy(this);
         else
             singleton = this;
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -51,6 +56,8 @@ public class VHSLibrary : MonoBehaviour
             : false;
 
         tapesInStock[(int)genreToGet]--;
+        _particleSystem.Play();
+        Util.PlayAudio(_audioSource, _rustle);
         return new VHSTape((Genre)genreToGet, rewindProbability);
     }
 

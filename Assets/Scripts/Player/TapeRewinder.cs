@@ -2,10 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.Playables;
 
 public class TapeRewinder : MonoBehaviour
 {
     private Animator _animator;
+    private AudioSource _audioSource;
     
     private VHSTape _currentTape;
     private bool _rewinding = false;
@@ -14,9 +17,12 @@ public class TapeRewinder : MonoBehaviour
     [SerializeField] private float _rewindTime = 10f;
     private float _rewindTimer;
 
+    [SerializeField] private AudioClip _insertTape, _doneRewinding, _takeTape;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -31,7 +37,7 @@ public class TapeRewinder : MonoBehaviour
 
             _rewinding = false; // allow tape to be grabbed
             _animator.Play("DoneRewinding");
-            Debug.Log("DING!");
+            Util.PlayAudio(_audioSource, _doneRewinding);
         }
     }
 
@@ -42,7 +48,8 @@ public class TapeRewinder : MonoBehaviour
         
         _rewinding = true;
         _tapeInside = true;
-        
+
+        Util.PlayAudio(_audioSource, _insertTape);
         _animator.Play("Rewinding");
     }
 
@@ -51,6 +58,7 @@ public class TapeRewinder : MonoBehaviour
         _tapeInside = false;
         _rewinding = false;
         
+        Util.PlayAudio(_audioSource, _takeTape);
         return _currentTape;
     }
 

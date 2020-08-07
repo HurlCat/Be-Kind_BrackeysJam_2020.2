@@ -9,14 +9,15 @@ public class PlayerInventory : MonoBehaviour
     public List<Transform> _UISlots = new List<Transform>(2);
     
     [SerializeField]
-    private GameObject _UIPrefab;
+    private GameObject _UIPrefab, _GroundPrefab;
 
     internal void GiveRandomTape()
     {
         if (_inventory.Count >= 2)
         {
             //drop a tape
-            RemoveTapeFromInventory(1);
+            DropTape(_inventory.Count-1);
+            RemoveTapeFromInventory(_inventory.Count-1);
             
             Debug.Log("Tape Removed");
         }
@@ -61,7 +62,13 @@ public class PlayerInventory : MonoBehaviour
         
         if (!tapeRewinder.IsRewinding() && tapeRewinder.IsFull()) // if the thing is done rewinding a tape
         {
-            Debug.Log("Tape Taken from Rewinder");
+            if (_inventory.Count == 2)
+            {
+                DropTape(_inventory.Count-1);
+                RemoveTapeFromInventory(_inventory.Count-1);
+            }
+                
+            
             _inventory.Add(tapeRewinder.GiveTapeToPlayer());
             InstantiateNewestTape(_inventory.Count-1);
             return;
@@ -71,7 +78,6 @@ public class PlayerInventory : MonoBehaviour
             for(int i = 0; i < _inventory.Count; i++) // iterate through inventory
                 if (!_inventory[i].rewound) // if we find an unwound tape
                 {
-                    Debug.Log("Tape Inserted into Rewinder");
                     tapeRewinder.InsertTape(_inventory[i]); // insert the tape into the rewinder
                     
                     RemoveTapeFromInventory(i);
@@ -91,7 +97,7 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (var tape in _UITapes)
         {
-            tape.transform.parent = _UISlots[Mathf.Clamp(_UISlots.IndexOf(tape.transform.parent) - 1, 0, 1)];
+            tape.transform.SetParent(_UISlots[Mathf.Clamp(_UISlots.IndexOf(tape.transform.parent) - 1, 0, 1)]);
             tape.transform.position = tape.transform.parent.position;
         }
     }
@@ -104,5 +110,10 @@ public class PlayerInventory : MonoBehaviour
         tapeUIPrefab.GetComponent<VHSUI>().tape = _inventory[_inventory.Count-1]; // set the Element's graphics
         
         _UITapes.Add(tapeUIPrefab); 
+    }
+
+    private void DropTape(int index)
+    {
+        GameObject _groundTape = (GameObject)Instantiate(_GroundPrefab, this.transform.position, Quaternion.identity);
     }
 }

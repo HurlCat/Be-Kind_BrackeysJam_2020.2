@@ -9,6 +9,7 @@ public class Shelf : MonoBehaviour
 {
     [SerializeField] private int _capacity;
     [SerializeField] private int _tapesInStock;
+    [SerializeField] private ShelfAnimator _shelfAnimator;
 
     private Waypoint _waypoint;
     
@@ -23,22 +24,32 @@ public class Shelf : MonoBehaviour
     private void Start()
     {
         _waypoint.type = (WaypointType)_genre;
+        if(_shelfAnimator != null)
+            _shelfAnimator.UpdateSprite(GetCapacityInPercent());
     }
 
     private void Update()
     {
-        if (((float) _tapesInStock / (float) _capacity) < .33f)
+        if (GetCapacityInPercent() < .33f)
         {
             TutorialEvents.singleton.FirstLowStock();
         }
     }
 
-    public void IncrementStock() => _tapesInStock++;
+    public void IncrementStock() 
+    {
+        _tapesInStock++;
+        if(_shelfAnimator != null)
+            _shelfAnimator.UpdateSprite(GetCapacityInPercent());
+    }
     public bool CompareGenres(Genre genre) => (genre == _genre) ? true : false; // returns true if param == this.genre
     public bool IsFull() => _tapesInStock >= _capacity; // returns true if at capacity
-
+    public float GetCapacityInPercent() => ((float)_tapesInStock / (float)_capacity);
+    
     public bool takeFromShelf(int quantity)
     {
+        if(_shelfAnimator != null)
+            _shelfAnimator.UpdateSprite(GetCapacityInPercent());
         if (_tapesInStock - quantity >= 0)
         {
             _tapesInStock -= quantity;
@@ -48,6 +59,5 @@ public class Shelf : MonoBehaviour
         {
             return false;
         }
-            
     }
 }

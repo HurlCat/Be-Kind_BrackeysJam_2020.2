@@ -13,14 +13,14 @@ public class VHSUI : MonoBehaviour
     public Image genre;
 
     public Sprite[] rewindStamps;
-    public Sprite[] goodStamps;
+    public Sprite goodStamp;
     public Sprite[] genreSprites;
 
-    private void Update() // gotta change this later to be more performant
+    private void Start() // gotta change this later to be more performant
     {
         artwork.sprite = tape.graphics;
         
-        timeStamp.sprite = tape.rewound ? goodStamps[UnityEngine.Random.Range(0, goodStamps.Length)] : rewindStamps[UnityEngine.Random.Range(0, rewindStamps.Length)];
+        timeStamp.sprite = tape.rewound ? goodStamp : rewindStamps[UnityEngine.Random.Range(0, rewindStamps.Length)];
         
         genre.sprite = genreSprites[(int)tape.genre];
     }
