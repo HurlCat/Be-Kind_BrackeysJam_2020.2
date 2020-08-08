@@ -61,6 +61,7 @@ public class TapeRewinder : MonoBehaviour
         _tapeInside = false;
         _rewinding = false;
         
+        _bubble.SetActive(false);
         Util.PlayAudio(_audioSource, _takeTape);
         return _currentTape;
     }
