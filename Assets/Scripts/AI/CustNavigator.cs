@@ -32,7 +32,7 @@ public class CustNavigator : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
 
-        _walkSpeed = UnityEngine.Random.Range(1.5f, 3f);
+        _walkSpeed = GameController.singleton.settings.GetRandCustomerSpeed();
     }
 
     private void Start()

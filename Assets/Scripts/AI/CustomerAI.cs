@@ -14,13 +14,13 @@ public class CustomerAI : MonoBehaviour
 
     private GameObject _moodBubbleInstance;
     
-    [SerializeField] private Genre _tapeToBuy;
-    [SerializeField] private bool _hasTape = false;
-    [SerializeField] private bool _paid = false;
-    [SerializeField] private bool _inLine = false;
-    [SerializeField] private bool _leaving = false;
+    private Genre _tapeToBuy;
+    private bool _hasTape = false;
+    private bool _paid = false;
+    private bool _inLine = false;
+     private bool _leaving = false;
     
-    [SerializeField] private int _desiredQuantity = 1;
+    private int _desiredQuantity = 1;
     
     [SerializeField] private AIState _currentState = AIState.Walking;
 
@@ -203,10 +203,10 @@ public class CustomerAI : MonoBehaviour
     private void RandomizeStats()
     {
         _tapeToBuy = (Genre)UnityEngine.Random.Range(0, 6);
-        _patienceTime = UnityEngine.Random.Range(3f, 5f);
-        _browsingTime = UnityEngine.Random.Range(3f, 8f);
-        _desiredQuantity = UnityEngine.Random.Range(1, 2);
-
+        Vector2 time = GameController.singleton.settings.GetRandCustomerStats();
+        
+        _patienceTime = time.y;
+        _browsingTime = time.x;
     } 
 
     private void CheckShelfStock()

@@ -10,6 +10,7 @@ public class DoorBell : MonoBehaviour
 
     private float _coolDownInSeconds = 3f;
     private float _lastTimePlayed = 0f;
+    private bool _tutorialRan = false;
     
 
     private void Awake() => _audioSource = GetComponent<AudioSource>();
@@ -20,6 +21,13 @@ public class DoorBell : MonoBehaviour
         {
             Util.PlayAudio(_audioSource, _doorBell);
             _lastTimePlayed = Time.time;
+
+            if (!_tutorialRan)
+            {
+                TutorialEvents.singleton.FirstCustomer(other.GetComponent<CustomerMood>());
+                _tutorialRan = true;
+            }
+
         }
     }
 }

@@ -11,6 +11,7 @@ public class Register : MonoBehaviour
 
     [SerializeField] private Waypoint _waypoint;
     [SerializeField] private AudioClip _ding;
+    [SerializeField] private ParticleSystem _particleSystem;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class Register : MonoBehaviour
         if (_customerQueue.Count > 0)
         {
             _customerQueue.First().PayForTape();
+            _particleSystem.Play();
             Util.PlayAudio(_audioSource,_ding);
         }
         else return;

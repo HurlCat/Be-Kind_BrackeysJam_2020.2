@@ -9,13 +9,15 @@ public class ScoreKeeper : MonoBehaviour
 {
     public static ScoreKeeper Singleton;
 
-    [FormerlySerializedAs("_ratingSlider")] [SerializeField] private Slider ratingSlider;
+    [SerializeField] private Slider ratingSlider;
     private int _newValue;
     private float _sliderValue;
 
     private float _timeToFill = 5f;
     private float _timer;
     private bool _startSliding = false;
+
+    public GameObject gameOverUI;
 
     
     // Start is called before the first frame update
@@ -29,6 +31,11 @@ public class ScoreKeeper : MonoBehaviour
 
     private void Update()
     {
+        if (ratingSlider.value <= 0f && !GameController.isGameOver)
+        {
+            GameController.singleton.GameOver();
+        }
+        
         if (_timer > _timeToFill)
         {
             _startSliding = false;
