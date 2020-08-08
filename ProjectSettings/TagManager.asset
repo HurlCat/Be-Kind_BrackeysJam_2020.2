@@ -10,6 +10,7 @@ TagManager:
   - VHSRewinder
   - Register
   - Tape
+  - GameOver
   layers:
   - Default
   - TransparentFX

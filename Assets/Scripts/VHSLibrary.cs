@@ -35,9 +35,17 @@ public class VHSLibrary : MonoBehaviour
     private void Start()
     {
         for (int i = 0; i < tapesInStock.Length; i++)
-            tapesInStock[i] = GameController.singleton.stockPerGenre;
+            tapesInStock[i] = GameController.singleton.settings.GetRandVHSBinStock();
+
+        InvokeRepeating("Restock", 0f, GameController.singleton.settings.VHSBinRefillRateInSeconds);
     }
 
+    private void Restock()
+    {
+        for (int i = 0; i < tapesInStock.Length; i++)
+            tapesInStock[i] += UnityEngine.Random.Range(0, 3);
+    }
+    
     public List<int> GenresInStock() // returns a list of indexes of genres in stock
     {
         List<int> inStock = new List<int>();
@@ -51,7 +59,7 @@ public class VHSLibrary : MonoBehaviour
     
     public VHSTape GetTapeFromGenre(int genreToGet)
     {
-        bool rewindProbability = UnityEngine.Random.Range(0, 100) > GameController.singleton.rewindProbability
+        bool rewindProbability = UnityEngine.Random.Range(0, 100) > GameController.singleton.settings.rewindProbability
             ? true
             : false;
 
@@ -90,8 +98,8 @@ public class VHSLibrary : MonoBehaviour
                     return Romance_MovieCovers[UnityEngine.Random.Range(0, Romance_MovieCovers.Length)];
                 break;
         }
-
         return null;
     }
+    
     
 }

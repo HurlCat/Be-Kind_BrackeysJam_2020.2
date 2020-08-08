@@ -6,9 +6,15 @@ using UnityEngine;
 public class TutorialEvents : MonoBehaviour
 {
     public static TutorialEvents singleton;
-    
-    public event Action onFirstUnrewound, onFirstLowStock, onFirstStart, onFirstCustomer, onFirstAngry;
+    public delegate void StockCallback(Shelf shelf);
+    public delegate void CusstomerCallback(CustomerMood customer);
 
+    public GameObject[] tutUI = new GameObject[4];
+    
+    public event Action onFirstStart;
+    public event StockCallback onFirstLowStock;
+    public event CusstomerCallback onFirstCustomer, onFirstAngry;
+    
     private void Awake()
     {
         if(singleton != null)
@@ -17,14 +23,10 @@ public class TutorialEvents : MonoBehaviour
             singleton = this;
     }
 
-    public void FirstUnrewound()
+    public void FirstLowStock(Shelf shelf)
     {
-        onFirstUnrewound?.Invoke();
-    }
-
-    public void FirstLowStock()
-    {
-        onFirstLowStock?.Invoke();
+        onFirstLowStock?.Invoke(shelf);
+        
     }
 
     public void FirstStart()
@@ -32,13 +34,13 @@ public class TutorialEvents : MonoBehaviour
         onFirstStart?.Invoke();
     }
 
-    public void FirstCustomer()
+    public void FirstCustomer(CustomerMood customer)
     {
-        onFirstCustomer?.Invoke();
+        onFirstCustomer?.Invoke(customer);
     }
 
-    public void FirstAngry()
+    public void FirstAngry(CustomerMood customer)
     {
-        onFirstStart?.Invoke();
+        onFirstAngry?.Invoke(customer);
     }
 }

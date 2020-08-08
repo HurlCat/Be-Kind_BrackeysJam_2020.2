@@ -5,10 +5,8 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] CustomerPrefabs;
-    [SerializeField] private float _maxSpawnRateInSeconds = 5f;
-    [SerializeField] private float _minSpawnRateInSeconds = 1f;
-
-    [SerializeField] private float _increaseSpawnRateInSeconds = 15f;
+    private float _maxSpawnRateInSeconds = 5f;
+    private float _minSpawnRateInSeconds = 1f;
 
     [Header("SpawnArea")]
     [SerializeField] private Vector2 _min;
@@ -16,8 +14,13 @@ public class CustomerSpawner : MonoBehaviour
     
     void Start()
     {
-        Invoke("SpawnCustomer", _maxSpawnRateInSeconds);
-        InvokeRepeating("IncreaseSpawnRate", 0f, _increaseSpawnRateInSeconds);
+        Vector2 spawnRates = GameController.singleton.settings.GetCustomerSpawnRate();
+
+        _minSpawnRateInSeconds = spawnRates.x;
+        _maxSpawnRateInSeconds = spawnRates.y;
+        
+        Invoke("SpawnCustomer", 15f);
+        InvokeRepeating("IncreaseSpawnRate", 0f, GameController.singleton.settings.increaseSpawnRate);
     }
 
     void SpawnCustomer()

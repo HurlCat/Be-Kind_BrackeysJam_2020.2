@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _stockShelf;
 
-    [SerializeField] private float _throwForce = 5f;
+    [SerializeField] private float _throwForce = 500f;
     
     [Header("InteractField")]
     [SerializeField] private Transform interactCheck;
@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.GameIsPaused)
+            return;
+        
         _animator.SetFloat("VertMove", _playerMovement.vertInput);
         _animator.SetFloat("HorizMove", _playerMovement.horizInput);
         _animator.SetFloat("Speed", new Vector2(_playerMovement.vertInput, _playerMovement.horizInput).magnitude);
@@ -42,8 +45,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetFloat("OldVert", _playerMovement.oldVert);
             _animator.SetFloat("OldHoriz", _playerMovement.oldHoriz);
         }
-            
-        
+
         if(Input.GetButtonDown("Fire1"))
             Interact();
 

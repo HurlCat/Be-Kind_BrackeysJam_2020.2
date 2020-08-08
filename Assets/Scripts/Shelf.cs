@@ -26,6 +26,9 @@ public class Shelf : MonoBehaviour
         _waypoint.type = (WaypointType)_genre;
         if(_shelfAnimator != null)
             _shelfAnimator.UpdateSprite(GetCapacityInPercent());
+        
+        if (GetCapacityInPercent() < .33f)
+            TutorialEvents.singleton.FirstLowStock(this);
     }
 
     public void IncrementStock() 
@@ -46,7 +49,7 @@ public class Shelf : MonoBehaviour
         if (_tapesInStock - quantity >= 0)
         {
             if (GetCapacityInPercent() < .33f)
-                TutorialEvents.singleton.FirstLowStock();
+                TutorialEvents.singleton.FirstLowStock(this);
             
             _tapesInStock -= quantity;
             return true;

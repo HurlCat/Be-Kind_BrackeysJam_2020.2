@@ -9,6 +9,7 @@ public class TapeRewinder : MonoBehaviour
 {
     private Animator _animator;
     private AudioSource _audioSource;
+    [SerializeField] private GameObject _bubble;
     
     private VHSTape _currentTape;
     private bool _rewinding = false;
@@ -37,6 +38,7 @@ public class TapeRewinder : MonoBehaviour
 
             _rewinding = false; // allow tape to be grabbed
             _animator.Play("DoneRewinding");
+            _bubble.SetActive(true);
             Util.PlayAudio(_audioSource, _doneRewinding);
         }
     }
@@ -49,6 +51,7 @@ public class TapeRewinder : MonoBehaviour
         _rewinding = true;
         _tapeInside = true;
 
+        _bubble.SetActive(false);
         Util.PlayAudio(_audioSource, _insertTape);
         _animator.Play("Rewinding");
     }

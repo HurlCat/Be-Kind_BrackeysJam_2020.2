@@ -38,7 +38,10 @@ public class CustomerMood : MonoBehaviour
     internal GameObject CreateMoodBubble()
     {
         if (_mood < 0)
+        {
+            TutorialEvents.singleton.FirstAngry(this);
             return (GameObject)Instantiate(_angryBubble, _bubblePos.position, _bubblePos.rotation, _bubblePos);
+        }
         if (_mood > 0)
             return (GameObject)Instantiate(_happyBubble, _bubblePos.position, _bubblePos.rotation, _bubblePos);
 

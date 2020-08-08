@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerInventory : MonoBehaviour
     
     [SerializeField]
     private GameObject _UIPrefab, _GroundPrefab;
-
+    
     internal void GiveRandomTape()
     {
         if (_inventory.Count >= 2)
@@ -24,9 +25,9 @@ public class PlayerInventory : MonoBehaviour
         int rand = UnityEngine.Random.Range(0, genresInStock.Count);
         
         _inventory.Add(VHSLibrary.singleton.GetTapeFromGenre(genresInStock[rand])); // grabs a tape from the bin
-
-        InstantiateNewestTape(_inventory.Count-1);
         
+        InstantiateNewestTape(_inventory.Count-1);
+
         Debug.Log("Added new tape " + _inventory[_inventory.Count-1].genre);
     }
 
