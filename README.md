@@ -1,4 +1,4 @@
-# HurlCat's Submission for the [Brackeys Game Jam 2020.2](https://itch.io/jam/brackeys-4)
+# [HurlCat's Submission](https://hurlcatgames.itch.io/be-kind) for the [Brackeys Game Jam 2020.2](https://itch.io/jam/brackeys-4)
 
 ## THEME: REWIND
 
