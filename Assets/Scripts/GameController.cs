@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Game")
+        if (SceneManager.GetActiveScene().name == "Game")
         {
             _sceneCamera = Camera.main;
             
@@ -83,6 +83,8 @@ public class GameController : MonoBehaviour
                 Invoke(nameof(StartTutorial), 1.5f);
 
             _gameOverUI = ScoreKeeper.Singleton.gameOverUI;
+
+            isGameOver = false;
         }
     }
 
