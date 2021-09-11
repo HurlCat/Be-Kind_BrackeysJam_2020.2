@@ -15,6 +15,10 @@
 **[WASD]** to move
 **[E]** to interact
 
+## Ranking
+![image](https://user-images.githubusercontent.com/14116906/132953898-45ec073d-6a58-4ddf-92b0-2b6515e739a7.png)
+
+
 ## Credits
 Steven Hurley - Programming, Game Design
 
